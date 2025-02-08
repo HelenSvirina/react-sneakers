@@ -1,13 +1,16 @@
 
 
-function Drawer() {
+function Drawer({onCloseCart, items = []}) {
     return (
-<div className='overlay'>
-    <div style={{display: 'none'}}  className="drawer">
+  <div className='overlay'>
+    <div  className="drawer">
         <h2 className='d-flex justify-between mb-30'>
-        Корзина <img className='cu-p' src="/img/Remove.svg" alt="Remove" />
+        Корзина <img className='cu-p' onClick={props.onCloseCart} src="/img/Remove.svg" alt="Remove" />
         </h2>
     <div className="items">
+
+       {items.map((obj) => {
+        <div>
         <div className="cartItem d-flex align-center mb-20">
             <img 
             className='mr-20' 
@@ -44,6 +47,15 @@ function Drawer() {
             </div>
             
         </div>
+
+      </div>
+       }
+       )}
+
+
+
+
+
     </div>
         <div className="cartTotalBlock"><ul>
               <li className='d-flex mb-20'>
@@ -62,7 +74,7 @@ function Drawer() {
         
     </div>
 </div>
-)
+ )
 } 
 
 export default Drawer;

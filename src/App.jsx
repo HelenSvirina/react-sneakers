@@ -1,31 +1,31 @@
 
 import './App.css';
-import Card from './components/Card';
+import React from 'react';
+import Card from './components/Card/Card';
 import Drawer from './components/Drawer';
-import Shapka from './components/Header';
+import Header from './components/Header';
 
-const arr =[
-  {name: 'Мужские Кроссовки Nike Blazer Mid Suede', 
-   price: 12999,
-   imageUrl: '/img/sneakers/image 5.png'
-  }, 
-  {name: 'Кроссовки Puma X Aka Boku Future Rider', 
-   price: 8999,
-   imageUrl: '/img/sneakers/image 5 (1).png'
-  },
-  {name: 'Мужские Кроссовки Nike Blazer Mid Suede', 
-   price: 8499,
-   imageUrl: '/img/sneakers/image 5 (2).jpg'
-},
-  {name: 'Мужские Кроссовки Under Armour Curry 8', 
-   price: 15999,
-   imageUrl: '/img/sneakers/image 5 (4).jpg'
-  }
-];
-  function App(props) {
-  return  <div className="wrapper clear">
-<Drawer/>      
-<Shapka/>
+
+  function App() {
+  const [cartItems, setCartItems] = React.useState([]) 
+  const [items, setItems] = React.useState([])  
+  const [cartOpened, setCartOpened] = React.useState(false);
+  
+  React.useEffect(()=> {
+  fetch('https://67a6efd4510789ef0dfc8294.mockapi.io/items')
+  .then(res => {
+    return res.json();
+  })
+  .then(json => {
+    setItems(json);
+  });
+  }, [])
+
+
+  return  (
+<div className="wrapper clear">
+ {cartOpened && <Drawer items = {cartItems} onCloseCart={() => setCartOpened(false)}/> }     
+ <Header onClickCart={() => setCartOpened(true)} />
 <div className="content p-40">
   <div className='d-flex align-center mb-40 justify-between'>
     <h1>Все кроссовки</h1>
@@ -34,12 +34,14 @@ const arr =[
     <input placeholder='Поиск...' />
     </div>
   </div>
-   <div className='d-flex'>
-   {arr.map(obj => 
+   <div className='d-flex flex-wrap'>
+   {items.map(obj => 
     <Card 
      title={obj.name} 
      price={obj.price}
      imageUrl={obj.imageUrl}
+     onClickPlus={() => console.log('Click on Plus')}
+     onClickLike={() => console.log('Click on Heart Like')}
     /> )
    }
        
@@ -47,6 +49,7 @@ const arr =[
  </div>
 </div>
  
-    
+ )   
 }
+
 export default App
