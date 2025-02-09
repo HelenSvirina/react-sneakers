@@ -5,7 +5,7 @@ function Drawer({onCloseCart, items = []}) {
   <div className='overlay'>
     <div  className="drawer">
         <h2 className='d-flex justify-between mb-30'>
-        Корзина <img className='cu-p' onClick={props.onCloseCart} src="/img/Remove.svg" alt="Remove" />
+        Корзина <img className='cu-p' onClick={onCloseCart} src="/img/Remove.svg" alt="Remove" />
         </h2>
     <div className="items">
 
@@ -16,38 +16,21 @@ function Drawer({onCloseCart, items = []}) {
             className='mr-20' 
             width={70} 
             height={70} 
-            src="/img/sneakers/image 5.png" 
+            src={obj.imageUrl} 
             alt="Sneakers" 
+            
             />
             
               <div className='mr-20'>
-                <p className='mb-5'>Мужские Кроссовки Nike Air Max 270</p>
-                <b>12 999 руб</b>
+                <p className='mb-5'>{obj.title}</p>
+                <b>{obj.price}.руб</b>
               </div>
               <div>
                 <img className='revoveBtn' src="/img/Remove.svg" alt="Remove" />
              </div>
             
         </div>
-        <div className="cartItem d-flex align-center mb-20">
-            <img 
-            className='mr-20' 
-            width={70} 
-            height={70} 
-            src="/img/sneakers/image 5.png" 
-            alt="Sneakers" 
-            />
-            
-            <div className='mr-20'>
-              <p className='mb-5'>Мужские Кроссовки Nike Air Max 270</p>
-              <b>12 999 руб</b>
-            </div>
-            <div>
-              <img className='revoveBtn' src="/img/Remove.svg" alt="Remove" />
-            </div>
-            
-        </div>
-
+       
       </div>
        }
        )}

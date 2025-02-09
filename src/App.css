@@ -112,18 +112,29 @@ p {
    
   }
 
-
-.greenButton {
-  position: relative;
-
-  
+  .cartTotalBlock div {
+    height: 0.5px;
+    width: 200px;
+    background-color: rgb(29, 26, 26);
+    transform: translateY(10px);
+    opacity: 15%;
+    border-style: dotted;
+    border-width: 1px;
+    margin-right: 5px;
+    margin-left: 5px;
+    
   }
+
 
   .arrow {
     position: absolute;
     right: 30px;
     top: 20px;
   }
+
+    .arrow:hover {
+      transform: translateX(5px);
+    }
 
 .greenButton {
   width: 100%;
@@ -136,9 +147,10 @@ p {
   color: #f3f3f3;
   font-size: 16px;
   font-weight: 500;
+  position: relative;
   
 }
 
-.greenButton:hover {
-  background: lighten(#495d30 10%);
-}
+  .greenButton:hover {
+    transform: translateY(-3px);
+  }

@@ -19,8 +19,14 @@ import Header from './components/Header';
   .then(json => {
     setItems(json);
   });
-  }, [])
+  }, []);
 
+  
+  const addToCart = (item) => {
+    setCartItems([...cartItems, item]);
+  };
+
+console.log(cartItems)
 
   return  (
 <div className="wrapper clear">
@@ -40,8 +46,8 @@ import Header from './components/Header';
      title={obj.name} 
      price={obj.price}
      imageUrl={obj.imageUrl}
-     onClickPlus={() => console.log('Click on Plus')}
-     onClickLike={() => console.log('Click on Heart Like')}
+     onClickPlus={(item) => addToCart(item)}
+     onClickLike={() => console.log('Like')}
     /> )
    }
        
