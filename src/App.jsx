@@ -1,61 +1,76 @@
 
-import './App.css';
+import './App.scss';
 import React from 'react';
-import Card from './components/Card/Card';
+import { Route } from 'react-router-dom';
 import Drawer from './components/Drawer';
 import Header from './components/Header';
+import axios, { Axios } from 'axios';
+import Home from './pages/Home';
 
 
   function App() {
   const [cartItems, setCartItems] = React.useState([]) 
   const [items, setItems] = React.useState([])  
   const [cartOpened, setCartOpened] = React.useState(false);
-  
+  const [searchValue, setSearchValue] = React.useState([]);
+  const [favorites, setFavorites] = React.useState([]);
+
   React.useEffect(()=> {
-  fetch('https://67a6efd4510789ef0dfc8294.mockapi.io/items')
+   axios.get('https://67a6efd4510789ef0dfc8294.mockapi.io/items')
+  .then(res =>  {
+    setItems(res.data)
+  });
+   axios.get('https://67a6efd4510789ef0dfc8294.mockapi.io/Cart')
   .then(res => {
-    return res.json();
-  })
-  .then(json => {
-    setItems(json);
+    setCartItems(res.data)
   });
   }, []);
-
+  
   
   const addToCart = (item) => {
-    setCartItems([...cartItems, item]);
+    axios.post('https://67a6efd4510789ef0dfc8294.mockapi.io/Cart', item)
+    setCartItems((prev) => [...prev, item]);
   };
 
-console.log(cartItems)
+  console.log(cartItems);
 
-  return  (
-<div className="wrapper clear">
- {cartOpened && <Drawer items = {cartItems} onCloseCart={() => setCartOpened(false)}/> }     
- <Header onClickCart={() => setCartOpened(true)} />
-<div className="content p-40">
-  <div className='d-flex align-center mb-40 justify-between'>
-    <h1>Все кроссовки</h1>
-    <div className='search-block d-flex'>
-    <img src="/img/Search.svg" alt="Search" />
-    <input placeholder='Поиск...' />
-    </div>
-  </div>
-   <div className='d-flex flex-wrap'>
-   {items.map(obj => 
-    <Card 
-     title={obj.name} 
-     price={obj.price}
-     imageUrl={obj.imageUrl}
-     onClickPlus={(item) => addToCart(item)}
-     onClickLike={() => console.log('Like')}
-    /> )
-   }
-       
-    </div>
- </div>
-</div>
+  const removeItemFromCart = (id) => {
+   axios.delete(`https://67a6efd4510789ef0dfc8294.mockapi.io/Cart/${id}`)
+   setCartItems((prev) => prev.filter((item) => item.id !== id));
+  }
+
+  const onChangeSearchInput = (event) => {
+    setSearchValue(event.target.value);
+  };
+
+  const addToFavorite = (obj) => {
+    setFavorites((prev) => [...prev, obj]);
+    
+  }
+
  
- )   
+return  (
+ <div className="wrapper clear">
+   {cartOpened && (
+     <Drawer items = {cartItems} onCloseCart={() => setCartOpened(false)} onRemove = {removeItemFromCart}/> 
+    )}     
+  
+    <Header onClickCart={() => setCartOpened(true)} />
+   
+   <Route path="/" exact>
+    <Home 
+       items={items} 
+       setItems={setItems} searchValue={searchValue} 
+       setSearchValue={setSearchValue}
+       onChangeSearchInput={onChangeSearchInput}
+       addToCart={addToCart}
+       addToFavorite={addToFavorite}
+    />
+
+   </Route>
+ </div>
+ 
+  );   
 }
 
 export default App

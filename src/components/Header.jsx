@@ -1,14 +1,18 @@
 
+import { Link } from 'react-router-dom';
+
 function Header(props) {
 
     return (
 <header className='d-flex justify-between align-center'>
     <div className="d-flex align-center">
       <img width = {40} height = {40} src="/img/image 4.png" />
+      <Link to="/">
         <div className="headerInfo">
             <h3 className='text-uppercase'> React sneakers</h3>
             <p className='opacity-5'>Магазин лучших кроссовок</p>
         </div>
+        </Link>
     </div>
         <ul className="d-flex">
             
@@ -25,8 +29,15 @@ function Header(props) {
                      
             <span>1205 руб.</span>
           </li>
-          <li>
-            <img width = {18} height = {18} src="/img/Union.png" />
+          <Link>
+          <li className="mr-30 cu-p">
+            <img  src="/img/favorite.jpg" alt="Favorite" />
+            <span>Закладки</span>
+          </li>
+          </Link>
+          <li className="mr-30 cu-p">
+            <img width = {18} height = {18} src="/img/Union.png" alt="Profile" />
+            <span>Профиль</span>
           </li>
         </ul>
 </header>
