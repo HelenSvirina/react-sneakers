@@ -1,5 +1,5 @@
 
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 function Header(props) {
 
@@ -29,7 +29,7 @@ function Header(props) {
                      
             <span>1205 руб.</span>
           </li>
-          <Link>
+          <Link to="/favorites">
           <li className="mr-30 cu-p">
             <img  src="/img/favorite.jpg" alt="Favorite" />
             <span>Закладки</span>

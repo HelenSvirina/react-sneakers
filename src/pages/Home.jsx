@@ -25,6 +25,7 @@ return (
     .map((obj, index) => 
      <Card
       key={index}
+      id={obj.id}
       title={obj.name} 
       price={obj.price}
       imageUrl={obj.imageUrl}
