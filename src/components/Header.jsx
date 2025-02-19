@@ -1,7 +1,11 @@
 
 import { Link } from 'react-router';
+import React from 'react';
+import { useCart } from '../hooks/useCart';
 
 function Header(props) {
+
+  const { totalPrice } = useCart(); //кастомный хук
 
     return (
 <header className='d-flex justify-between align-center'>
@@ -27,7 +31,7 @@ function Header(props) {
               <path d="M1 1H4.27273L6.46545 11.9555C6.54027 12.3321 6.7452 12.6705 7.04436 12.9113C7.34351 13.1522 7.71784 13.2801 8.10182 13.2727H16.0545C16.4385 13.2801 16.8129 13.1522 17.112 12.9113C17.4112 12.6705 17.6161 12.3321 17.6909 11.9555L19 5.09091H5.09091" stroke="#9B9B9B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
                      
-            <span>1205 руб.</span>
+            <span>{totalPrice} руб.</span>
           </li>
           <Link to="/favorites">
           <li className="mr-30 cu-p">
@@ -35,14 +39,16 @@ function Header(props) {
             <span>Закладки</span>
           </li>
           </Link>
+          <Link to="/orders">
           <li className="mr-30 cu-p">
             <img width = {18} height = {18} src="/img/Union.png" alt="Profile" />
             <span>Профиль</span>
           </li>
+          </Link>
         </ul>
 </header>
 
-)
+ )
 }
 
 export default Header;

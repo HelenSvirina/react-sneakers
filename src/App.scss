@@ -125,7 +125,7 @@ p {
 
   .cartTotalBlock div {
     height: 0.5px;
-    width: 200px;
+    width: 180px;
     background-color: rgb(29, 26, 26);
     transform: translateY(10px);
     opacity: 15%;
@@ -159,6 +159,11 @@ p {
   font-size: 16px;
   font-weight: 500;
   position: relative;
+
+  &:disabled {
+    background-color: #dddddd;
+    cursor: default;
+  }
   
 }
 
